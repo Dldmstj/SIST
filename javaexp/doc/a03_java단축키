@@ -1,0 +1,27 @@
+	1. 단일 주석 : ctrl + /
+		다중 행 주석  : ctrl + shift + /
+	2. 자동 출력문 생성 : ctrl + space
+	3. 글자 크기 조절 : ctrl + (-/+)
+	4. 전체/축소 화면 : ctrl + m
+	5. 실행 : ctrl + f11
+	6. 줄복사 처리 : ctrl + alt + ↓
+	
+	# svn / git
+	1. 현업에서 사용되는 소스관리 툴
+	2. 변경되는 시점마다 version 각 파일에 mapping (작성자, 주석 포함)
+	3. 서버 설치
+	4. client를 eclipse help ==> market place에서 svn 검색해서 설치
+	5. 서버에 접속
+		https://192.168.10.99/svn/web
+		future//7777
+	6. svn 명령어
+		폴더 기준 / 파일 기준
+		
+		1) team ==> update
+			서버에 있는 파일이나 경로 가져오기
+		2) team ==> commit
+			서버에 파일 올리
+		3) team ==> refresh / cleanup
+			서버에 있는 파일이 충돌 ==> locked
+			lock을 풀어주는 명령어
+		3) replace with ==> latest repositories		
