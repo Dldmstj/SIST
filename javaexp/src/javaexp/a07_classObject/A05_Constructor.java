@@ -19,6 +19,20 @@ public class A05_Constructor {
 		System.out.println("물건명\t가격\t수량");
 		System.out.println(prd1.pname+"\t"+prd1.pPrice+"원\t"+prd1.pCnt);
 		System.out.println(prd2.pname+"\t"+prd2.pPrice+"원\t"+prd2.pCnt);
+		System.out.println();
+		
+		ProductVO p1 = new ProductVO("사과");
+		// p1: 객체의 특정한 heap영역의 주소를 간단하게 선언한 것이다. 참조변수
+		System.out.println(p1.name);
+		ProductVO p2 = new ProductVO("바나나");
+		System.out.println(p2.name);
+		System.out.println();
+		
+		ProductVO p3 = new ProductVO("오렌지",2000,5);
+		System.out.println("# 물건 객체 #");
+		System.out.println(p3.name);
+		System.out.println(p3.price);
+		System.out.println(p3.cnt);
 	}
 }
 //		ex) Product_ 클래스 선언 필드로 물건, 가격, 갯수 -> 영문으로 선언하고,

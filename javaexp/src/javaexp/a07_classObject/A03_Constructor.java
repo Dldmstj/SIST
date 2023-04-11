@@ -31,6 +31,11 @@ public class A03_Constructor {
 		  			this.name = name;
 		  			this.age = age;
 		  			this loc = loc;
+		  			
+		  	4. 클래스의 생성자 선언과 객체 생성
+		  		1) 생성자, 필드의 초기화를 위해서 사용된다.
+		  		2) 객체의 생성은 클래스에서 선언된 생성자 중에 하나를 선택해서 생성한다.
+		  			overloading()에 의해 선언된 내용 중에 하나를 사용한다.
 		 */	
 		// 클래스명을 기준으로 객체를 사용할 준비;
 		Person p01;
