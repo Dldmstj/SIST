@@ -23,18 +23,31 @@ class GraphicCard extends Part{
 		System.out.println("그래픽카드는 컴퓨터의 동적화면 처리를 빠르게 한다.");
 	}
 	
-}	
+}
+/*
+   2단계: 실무적 구조
+   1:多 처리구조
+   컴퓨터 안에 여러 부품을 장착할 수 있도록 처리하였다.
+ */
 class ComputerParts{
 	private String company;
 	private Part[] parts;
 	private int idx;
-
+	
+	// 컴퓨터를 생성할 때, 제조사와 부품 3개를 장착할 수 있게 배열로 선언.
 	public ComputerParts(String company) {
 		this.company = company;
 		parts = new Part[3];
 	}
 	
+	// 부품 장착 처리
+	// 외부에서 호춣할 때 처리형태
+	// com.addPart(new Cpu());
+	// com.addPart(new Ram());
+	// com.addPart(new Ssd());
+	// Part part = new Part(); 	형태로 다형성을 처리하는 상속구조가 되어있기 때문
 	public void addPart(Part part) {
+		// 3개 이상은 장착되지 못하게 처리: 배열의 크기가 초기에 고정형으로 생성이 되기 때문
 		if(idx<3) {
 			this.parts[idx++] = part;
 			System.out.println("부품이 장착되었습니다.");
@@ -46,8 +59,9 @@ class ComputerParts{
 		System.out.println(company+" 컴퓨터.");
 		// parts에 부품이 하나라도 추가되어 있을 때
 		if(parts[0]!=null) {
-			for(Part part:parts) {
-				part.showInfo();
+			// 반복문을 통해 parts 안에 담겨있는 객체를 하나씩 가져와서 처리
+			for(Part part:parts) {	// 실제 객체가 할당되어있을 때만 
+				part.showInfo();	// 재정의된 메서드를 호출
 			}
 		} else {
 			System.out.println("부품이 장착되지 않았습니다.");

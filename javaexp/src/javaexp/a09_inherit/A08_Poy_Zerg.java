@@ -1,3 +1,4 @@
+
 package javaexp.a09_inherit;
 
 public class A08_Poy_Zerg {

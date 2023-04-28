@@ -10,6 +10,16 @@ public class A04_Polymorphism {
 		  	동일하게 정의하여 다양한 기능을 처리하는 것을 말함.
 		  2. 상위 ==> 여러가지 하위 객체를 통해, 다양한 기능을 처리하는 것을 말한다.
 		  	ex) 컴퓨터 부품(Cpu, Ram, Sdd,...)
+		  		class Part{
+		  			void showInf()
+		  		class Cpu extends Part{
+		  			void showInf() : 메서드 오버라이딩 처리
+		  			 	super.showInf()
+		  			 	각 부품별 추가되는 기능 처리
+		  		class Ram extends Part{}
+		  		class Ssd extends Part{}
+		  		class ... extends Part{}
+		  		
 		  		class Computer{
 		  			String kind;
 		  			Cpu c;
@@ -21,6 +31,10 @@ public class A04_Polymorphism {
 		  		Part p2 = new Ram();
 		  		Part p3 = new Ssd();
 		  		GrapCar...
+			  		개별적으로 Computer 클래스에서 부품이 추가될 때마다 변경ㅇ하는 것이 아니라,
+			  		공통 상위 클래스를 선언하여 해당 부품들이 다형성에 의해서 추가가 될 수 있는,
+			  		보다 유연한 구조로 처리하는 것이 다형성의 핵심이라고 할 수 있음.
+		  		
 		  		void addPArt(Part p)
 		  			plist.add(p);
 		  		void showParts()
@@ -29,6 +43,9 @@ public class A04_Polymorphism {
 		  		com.addPart(new Ram());
 		  		com.addPart(new Ssd());
 		  		Part p1 = new Cpu();
+			  		다형성은 상속하는 상위 객체의 메모리에 여러가지 하위 객체들이 할당되어
+			  		기능적으로 다양한 처리를 하는 구조를 말한다.
+			  		
 		  		Part p2 = new Ram();
 		  		Part p3 = new Ssd();
 		   3. 기본형식
@@ -39,6 +56,18 @@ public class A04_Polymorphism {
 		   			
 		   			Animal an01 = new Cat();
 		   			Animal an02 = new Bird();
+		   			an01.sound();	// 다양한 기능적 재정의 메서드 처리
+		   			an02.sound();
+		   			
+		   			이들을 처리하는 포함관걔 클래스에서 1:1처리와 1:다관계처리를 한다.
+		   			class Zoo{
+		   				private Animal ani;
+		   					// 동물원의 여러 종류 중 하나의 동물만 할당
+		   			}
+		   			class Zoo{
+		   				private ArrayList<Animal> animals;
+		   					// 동물원의 여러 종류의 다양한 동물을 할당할 수 있게 처리
+		   			}
 		   			2단계
 		   				상위 클래스 : 큰메모리
 		   				하위 클래스 : 작은메모리
@@ -47,6 +76,10 @@ public class A04_Polymorphism {
 		   				- 작은메모리 = (작은메모리)큰메모리; casting(강제형변환)
 		   					하위객체 = (하위클래스)상위객체 ★★
 		   					ps) 예고 상위 <generic> => 상위<하위객체>
+		   					
+		   					ArrayList<Animal> alist = new ArrayList<Animal>();
+		   					alist.add(new Cat());
+		   					alist.add(new Dog());
 		 */
 		Animal ani01 = new Cat();
 		ani01.sound();

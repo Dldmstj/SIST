@@ -1,0 +1,114 @@
+# 컬렉션
+1. 동적으로 여러가지 데이터나 객체를 담을 수 있는 컨테이너형 객체로, java api(내장된 객체)로 지원되고 있다.
+2. 종류
+	1) set
+	2) list: 나열형 데이터 처리
+	3) map
+3. List 인터페이스를 상속받은 ArrayList형태로 진행
+
+# 사전개념
+1. generic
+	1) 모든 자바객체는 Object라는 내장된 api객체를 상속받는다.
+	2) 기본 ArrayList는 이 객체를 포함하는 객체가 기본임
+	3) generic이라는 개념을 사용하면
+	4) typecasting과 같은 특정한 객체만 할당하게 정의하여 처리할 수 있도록 하는 개념이다.
+	5) 기본형식
+		컨테이너형 객체 <타입>
+		ArrayList => ArrayList<Object>가 포함되어 있음
+		상위 = 하위(큰타입 = 작은타입)
+		Object ob = new Person(); 다형성 처리
+		하위 = 상위(작은타입 = 큰타입)
+		Person p = (Person)ob; 타입캐스팅 필요
+		이 때, Object에 타입캐스팅 필요없이 바로 Person객체가 들어올 수 있게 선언하는 형식이
+				Object<Person> ob = new Person(); 다형성 처리
+		이렇게 되면 타입캐스팅 없이도 Person p = ob1; 할당할 수 있다.
+		이것이 generic에 의한 객체처리.
+		여기에는 Object 타입만 들어올 수 있는 동적인 구조체
+		ex) ((),(),())
+			add(new 객체())
+			add(new 객체())
+			add(new 객체())
+			add(0) => 첫번째 객체..
+		위 ArrayList => ArrayList<Object> 이 포함되어 있어서
+		
+		ArrayList li = new ArrayList();
+		li.add(new Person());		Object ob1 = new Person();
+									Person p1 = ob1;
+		li.add(new Woman());		Object ob2 = new Woman();
+		li.add(new Man());			Object ob3 = new Man();
+		Person p01 = (Person)li.get(0);
+		이렇게 처리할 것을
+		
+		ArrayList<Person> li2 = new ArrayList<Person>();
+		li2.add(new Person());
+		Person p02 = li2.get(0); 로 타입캐스팅 없이 처리할 수 있다.
+		
+		generic을 선언하지 않으면 Object최상위 형태에 다향성으로 여러 하위에 여러 객체를 선언할 수 있지만,
+		다시 호출해서 사용할 때는 typecasting을 각 객체마다 선언해야 한다.
+		generic을 선언하면 특정한 객체만 강제로 할당할 수 있게 선언하기 때문에 해당 type의 객체만 할당할 수 있고,
+		또는 호출할 때 해당 객체에 대한 typecasting 필요없이 호출하여 사용할 수 있다.
+		
+# ArrayList
+1. 사용방법
+	1) 객체의 생성(동적객체를 생성)
+		[] : 동적으로 객체를 할당했다가 삭제, 변경이 가능...
+		ArrayList<할당할타입> list = new ArrayList<할당할타입>();
+			ex) ArrayList<Person> list = new ArrayList<Person>();
+	2) 객체의 할당(하나씩 하나씩 추가)
+		참조명.add(객체);
+			ex) list.add(new Person("홍길동",25));
+		주의) Person타입할당 할 수 있는 객체들이 들어올 수 있다.
+			Woman은 Person타입이 아니고, 가능성 았는 상속관계가 이니기에 Woman은 할당할 수 없다.
+			
+	3) 전체 크기를 확인
+		list.size();	// 배열은 .length()
+	4) 추가되어 있는 동적인 구성요소를 확인
+		참조명.get(index 번호);
+		list.get(0);	// new Person("홍길동",25)
+	5) foreach로, for index구분으로도 활용된다
+			for(Person p:list){
+				p.getName()
+			}
+			for(int idx=0; idx<list.size(); idx++){
+				Person p = list.get(idx);
+				p.getName();
+			}
+2. 개발순서
+	1) 하나의 단위 데이터 class 선언(필드/생성자/getter-setter)
+		class Person
+	2) list 객체 선언
+		import java.util.ArrayList;
+		ArrayList<Person> list = new ArrayList<Person>();
+	3) 구성 객체 추가
+		list.add(new Person());
+	4) 반복문을 이용해 호출/처리
+		for(Person p : list){
+			list.getName();
+		}
+		
+	# ArrayList 를 다형성 처리
+	1. 위와 같이 Object에 상속으로 polymolism에 대한 내용을 casting해서 처리한다. generic을 상위 객체로 하여 다양한 객체를 할당하고 호출하는 것은
+		위의 내용에 반하는 것일까?
+	2. 이슈의 예
+		class Cpu extends Part{}
+		class Ram extends Part{}
+		class Ssd extends Part{}
+		
+		ArrayList<Part> plist = new ArryList<Part>();
+		plist.add(new Cpu());
+		plist.add(new Ram());
+		plist.add(new Ssd());
+		// type Part의 다형성에 의해 상속을 받았기 때문에, Cpu, Ram, Ssd가 할당될 수 있다.
+		// 무조건 할당할 수 있는 게 아니라 Part를 상속받은 클래스만 add 할당가능
+		
+		class Computer{
+			ArrayList<Part> list;
+			void addPArt(Part part){
+				list.add(part);
+			}
+			void showAll(){
+				for(Part p :list){
+					p.getName();
+				}
+			}
+		}

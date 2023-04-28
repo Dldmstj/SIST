@@ -29,14 +29,14 @@ class Part{
 
 
 class Cpu extends Part{
-
 	public Cpu(String spec) {
 		super("cpu", spec);
 	}
-
 	@Override
 	public void showInfo() {
 		super.showInfo();
+			// 추가되는 기능을 처리하여 각 부품별로 동일한 메서드이지만
+			// 다양한 기능적 처리를 할 수 있게 함.
 		System.out.println("CPU는 컴퓨터의 핵심 부품으로, 중앙처리를 한다.");
 	}
 	
@@ -69,6 +69,8 @@ class Ram extends Part{
 	}
 	
 }
+// 1단계
+// 1:1 관계 구조. 컴퓨터 안에 다양한 하나의 부품을 장착할 수 있도록 처리.
 class Computer{
 	private String company;
 	private Part part;
