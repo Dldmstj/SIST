@@ -78,17 +78,33 @@ public class A17_0503 {
 		//[1단계:확인] 4. map으로 회원의 정보를 저장할려고 한다. 저장하고 저장된 정보를 호출할 때, 
 //				동일한 id로 회원 정보를 입력하고 변경되는 회원 정보를 처리해보세요.
 		System.out.println("# map으로  회원 정보 저장하기 #");
-		Map<String,String> members = new HashMap<String, String>();
-		members.put("sh1n", "짱구");
-		members.put("sh1n", "맹구");	// key 중복
-		members.put("H00n", "훈이");
-		members.put("Cheo1", "철수");	// value 중복
-		// key의 중복은 최종으로 입력된 것을 기준으로 처리된다.
-		System.out.println("회원id\t이름");
-		System.out.println("-----------");
+//		Map<String,String> members = new HashMap<String, String>();
+//		members.put("sh1n", "짱구");
+//		members.put("sh1n", "맹구");	// key 중복
+//		members.put("H00n", "훈이");
+//		members.put("Cheo1", "철수");	// value 중복
+//		// key의 중복은 최종으로 입력된 것을 기준으로 처리된다.
+//		System.out.println("회원id\t이름");
+//		System.out.println("-----------");
+//		for(String key:members.keySet()) {
+//			System.out.print(key+"\t");
+//			System.out.print(members.get(key)+"\n");
+//		}
+		Map<String, Member> members = new HashMap<String, Member>();
+		members.put("sh1n", new Member("짱구",5,"admin",5000));
+		members.put("sh1n", new Member("맹구",5,"member",1000));
+		members.put("H00n", new Member("훈이",5,"member",1000));
+		members.put("Cheo1", new Member("철수",5,"member",2000));
+		members.put("Y00r1", new Member("유리",5,"admin",10000));
+		System.out.println("회원id\t이름\t나이\t권한\t포인트");
+		System.out.println("-------------------------------------");
 		for(String key:members.keySet()) {
+			Member m = members.get(key);	// ★★★
 			System.out.print(key+"\t");
-			System.out.print(members.get(key)+"\n");
+			System.out.print(m.getName()+"\t");
+			System.out.print(m.getAge()+"\t");
+			System.out.print(m.getAuth()+"\t");
+			System.out.print(m.getPoint()+"\n");
 		}
 		System.out.println();
 		
@@ -167,4 +183,43 @@ public class A17_0503 {
 		}
 	}
 
+}
+
+class Member{
+	private String name;
+	private int age;
+	private String auth;
+	private int point;
+	
+	public Member() {}
+	public Member(String name, int age, String auth, int point) {
+		this.name = name;
+		this.age = age;
+		this.auth = auth;
+		this.point = point;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public String getAuth() {
+		return auth;
+	}
+	public void setAuth(String auth) {
+		this.auth = auth;
+	}
+	public int getPoint() {
+		return point;
+	}
+	public void setPoint(int point) {
+		this.point = point;
+	}
 }

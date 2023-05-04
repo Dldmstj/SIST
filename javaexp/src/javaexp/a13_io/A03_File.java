@@ -14,7 +14,7 @@ public class A03_File {
 		  	2. 파일 객체의 처리하는 내용
 		  		1) 일반 데이터를 물리적으로 장기간 저장할 수 있음
 		  		2) 장기간 저장한 데이터를 일반 데이터로 호출하여 사용
-		  		3) 특정한 파일을 저장 처리
+		  		3) 특정한 파일을 저장 처리 	ex) File f = new File("a.txt");
 		  		4) 특정한 경로를 저장 처리
 		  		5) 파일의 메서드로 확인할 수 있는 데이터
 		  			파일의 크기, 파일의 이름, 파일의 속성(쓰기/읽기/권한)
@@ -22,9 +22,11 @@ public class A03_File {
 		  			디렉토리의 생성, 디렉토리에 포함된 파일 객체 가져오기
 		  	3. 기능 메서드
 		  		createNewFile() : 파일 생성
+		  			프로그램적인 객체를 물리적인 파일로 만들어주는 작업
+		  			=> 
 		  		mkdir() : 디렉토리 생성
 		  		mkdirs(): 경로상에 없는 모드 디렉토리 생성
-		  		delete() : 파일 또는 디렉토리 삭제
+		  		delete() : 파일 또는 디렉토리 삭제. 파일이 있으면 해당 파일을 물리적으로 삭제
 		  		canExcute() : 실행 파일 여부
 		  		canRead() : 읽을 수 있는지 여부
 		  		cnaWrite() : 쓸 수 있는지 여부
@@ -50,9 +52,11 @@ public class A03_File {
 		File f06 = new File(path + "a06_f");
 		
 		try {	// io가 일어나기 때문에 필수 예외 처리
+			if(!f02.exists())	// 물리적 파일이 없으면
 			f02.createNewFile();
+			
 			f03.mkdir();	// 경로를 만들 때 사용하는 메서드.
-			f04.mkdir();
+			f04.mkdir();	// 경로를 만들 때는 필수 예외가 필요없다.
 			f05.mkdir();
 			f06.mkdir();
 		} catch (IOException e) {

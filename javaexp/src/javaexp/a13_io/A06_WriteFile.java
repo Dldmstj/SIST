@@ -24,11 +24,11 @@ public class A06_WriteFile {
 		String path="C:\\Users\\user\\git\\SIST\\javaexp\\src\\javaexp\\a13_io\\";
 		Writer fout = null;
 		try {
-			fout = new FileWriter(path + "z01_sample.txt");
+			fout = new FileWriter(path + "z01_sample.txt",true);
 			Scanner sc = new Scanner(System.in);
 			System.out.print("파일에 쓸 내용을 입력하세요: ");
 			String data = sc.nextLine();
-			fout.write("기존 내용");	// 내용 새로 덮어씀
+//			fout.write("기존 내용");	// 내용 새로 덮어씀
 			fout.append("\n" + data);	// 기존의 내용에 누적됨
 			System.out.println("입력 완료!");
 			fout.flush(); 	// buffer에 있는 임시메모리 해제

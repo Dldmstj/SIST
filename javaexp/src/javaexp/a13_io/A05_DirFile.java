@@ -7,6 +7,16 @@ public class A05_DirFile {
 
 	public static void main(String[] args) {
 		String path = "C:\\Users\\user\\git\\SIST\\javaexp\\src\\javaexp\\a13_io\\a01_folder\\";
+		/*
+		  # 파일 내 쓰기 기능 처리
+		  	1. 기존 내용을 삭제하고 데이터 입력하기
+		  		new FileWriter("경로명\\파일명");
+		  		.write("저장할 문자열");
+		  		.append("위 write처리 이후에 더 추가할 내용 처리");
+		  	2. 기존 내용을 그대로 두고 데이터 입력하기
+		  		new FileWriter("경로명\\파일명,true");
+		  		.append("추가할 문자열");
+		 */
 //		File f01  = new File(path + "a01");
 //		File f02  = new File(path + "a02");
 //		File f03  = new File(path + "a03");
