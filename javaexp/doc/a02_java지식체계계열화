@@ -477,23 +477,288 @@
 		
 	9. 객체 vs 객체
 		1) 패키지
+			자바 프로그램에서 데이터 접근의 기준을 말한다.
+			특정한 클래스들이 묶음 단위로 설정되어 있다.
+			패키지 안에 있는 객체들은 접근범위가 X(default)로 접근제어자가 붙어있지 않을 때를 말하면, private이외에는 접근이 가능하다.
+			패키지가 다른 객체를 호출할 때는 패키지명.클래스명으로 호출 가능/import 패키지.클래스; 선언 후, 해달 클래스/멤버의 접근 범위가
+			public일 때, 접근이 가능하다.
+			
 		2) 접근제어자
+			private : 외부 객체에서 접근 불가
+			X(default) : 같은 패키지에 있는 객체들끼리 접근 가능
+			protected : 상속 관계가 있고, 상속을 기준으로 처리 가능
+			public : import를 사용하면 접근 제한이 없음.
+			
 		3) 1:1객체
+			객체 지향 프로그램에서 관계형 처리의 기초
+			포함될 클래스 선언 후, 포함할 클래스를 포함될 클래스를 멤버로 하여 선언하여 처리하는 형식을 말한다.
+			ex)
+			class Woman{}
+			class Man{
+				private Woman woman;
+				public void setWoman(Woman woman) {		// 객체가 들어오게 설정
+					this.woman = woman;
+				}
+				public void show(){
+					if(woman != null){		// 객체가 필드에 할당되어 있을 때
+						System.out.privt(woman.getName());	// 멤버 사용 가능
+					}
+				}
+			}
+			// main()
+			Man m01 = new Man();
+			m01.setWoman(new Woman());
+			m01.show();
+			
 		4) 배열형 객체
+			Product[] arry1 = new Product[3];
+			Product[] arry2 = {new Product(), new Product(), new Product(),...}
+			arry2[0].getName(); arry2[1].getName();
+			arry1.length;
+			List<Product> plist = new arrayList<Product>();
+			plist.add(new Product());
+			plist.get(0); plist.size();
+			
 		5) 1:다객체
+			하나의 객체 안에 여러 개의 객체를 포함하는 관계구조를 말한다.
+			실무적으로 가장 많이 활용되는 구조라고 할 수 있다. ex) 쇼핑몰 안에 물건리스트/회원리스트
+			class Member{}
+			class ShoppingMall{
+				private List<Member> mlist;
+				public void registMem(Member mem){
+					mlist.add(mem);
+				}
+				public void showAll(){
+					for(Member m:mlist){
+						m.getId(); m.getName()...
+					}
+				}
+			}
+			ShoppingMall sm = new ShoppingMall();
+			sm.registMem(new Member());
+			sm.showAll();
+			
 		6) 상속
+			상속은 재활용을 효과적으로 처리할 수 있는 기능적 내용과 함께, 보다 효과적으로 추가되는 기능이나 객체들을 다형성에 의해서
+			처리하기 위한 목적이다.
+			- 상속 1단계: 재활용
+				class Father{
+					String skill = "운동을 잘 한다.";
+				}
+				class Son extends Father{
+					String favorFood="중국음식을 좋아한다.";
+				}
+				Son s1 = new Son();
+				s1.skill; 	s1.favorFood;
+				// 상속받은 Son은 상위의 멤버와 자신의 추가 멤버를 사용할 수 있다.
+				
+			- 상속 2단계: 재정의(오버라이딩)
+				같은 이름의 필드/메서드로 다른 데이터할당 및 기능적인 처리를 한다.
+				class Worker{
+					void working{
+						System.out.println("일을 합니다.");
+					}
+				}
+				class Police extends Worker{
+					void working{	// 상위와 동일한 메서드 선언이지만, 다른 코드를 처리하여 재정의를 할 수 있다.
+						super.working();
+						System.out.println("치안을 유지합니다.");
+					}
+				}
+			
+			- 상속 3단계 : 다형성 처리
+				위와같이 상속관계에 의해 재정의하면 상위 = 하위 형식으로 상위에 있는 선언한 메모리에 여러가지 상속받은 하위 클래스를 선언하여, 
+				같은 상위 객체를 참조로 하여 동일한 기능 메서드로 기능적인 다양한 처리가 가능하다.
+				Worker w1 = new Police();
+				Worker w2 = new Fireman();
+				Worker w3 = new Programmer();
+				w1.working(); w2.working(); w3.working();
+				List<Worker> wlist = new ArrayList<Worker>();
+				wlist.add(new Police());	// 다형성으로 가능하다.
+				wlist.add(new Fireman());	
+				wlist.add(new Programmer());
+				for(Worker w1 : wlist){
+					w1.working();	// 다형성으로 재정의된 메서드가 다양한 처리
+				}
+			
 		7) 오버라이딩
+			오버라이딩: 상속관계에서 상위에 선언한 필드와 메서드를 하위에서 다시 재정의하여 처리하는 것을 말한다.
+			다형성: 상속관계가 설정이 되면 상위 메모리 선언에 하위객체들이 할당되어,
+					상위메모리에 여러가지 형태의 다양한 하위 객체들이 처리가 되고, 재정의한 메서드(오버라이딩)는 동일한 이름이지만
+					다양한 기능적 처리가 가능하다.
 		8) 추상클래스
+			추상이라는 개념에서 파생하여 상속관계에서도 처리하게 하는 것을 말한다.
+			재정의한 메서드를 추상화(body가 붙지 않음 {}x )하여, 상속받은 하위 클래스에서는 위 추상 메서드를 반드시 상속하여 처리하게끔
+			하는 것을 말한다.
+			특징)
+				- 추상클래스는 단독으로 객체를 생성하지 못한다. 다형성으로만 객체 생성(상위 추상 = 하위실제)
+				- 추상클래스는 실제 메서드와 추상메서드가 같이 있다. 추상메서드가 한 개라도 선언되는 순간, 추상클래스가 된다.
+				- 추상메서드는 하위클래스에서 반드시 재정의하여야 컴파일 된다.
+			ex) abstract class Company{
+				void getMoney(){	// 공통 기능 메서드(재정의 or 재활용 가능)
+					회사가 사원으로 돈을 번다
+				}
+					abstract void working();	// 다양한 기능 하위에 재정의를 강제함
+				}
+				class Samsung extends Company{
+					void woriking(){
+						전자제품을 생산한다.
+					}
+				}
+				Company com01 = new Samsung();
+				com01.getMoney(); 	com01.working();
 		9) 인터페이스
+			기능적으로 추가할 내용에 대한 부분을 인터페이스로 선언하여, 상속받은 실제 클래스로 사용할 수 있다.
+			- 특징
+				static 멤버는 인터페이스.멤버로 사용가능
+				재정의메서드, default 메서드는 하위객체를 참조로 하여 사용
+				ex) FlyWay fw1 = new ContryFlying();
+					fw1.flying();
+				ex) FlyWay fw2 = new WorldFlying();
+					fw2.flying();
+			- 구성
+				인터페이스의 필드는 public static final을 default 포함(생략가능)한다.
+				추상메서드 public abstract default 포함(생략가능)
+				-- 8버전 이후 추가된 내용 --
+				public default 메서드명(){} 구상메서드(공통) 추가
+					주의) 직접적으로 default라고 선언해야함
+				public static 메서드명(){} static 구상메서드(공통)
+			ex) interface FlyWay{
+				[public abstract] void fly();
+				class CountryFlying implements FlyWay{
+					public void fly(){
+						우리 동네를 나르다..
+					}
+				}
+				class WorldFlying implements FlyWay{
+					public void fly(){
+						세계 창공을 누비다..
+					}
+				}
+				FlyWay fw1 = new CountryFlying();
+			ex) 인터페이스는 실제 다른 클래스 안에서 선언되어 사용된다.
+				class Mz{
+					private FlyWay fw;
+					public void setWing(FlyWay fw){
+						this.fw = fw;
+					}
+					public void flying(){
+						if(fw!=null)	//하늘을 날다
+							fw.flying();
+					}
+				}
+				Mz m1 = new Mz();
+				m1.setWing(new CountryFlying());
+				m1.flying();
+			}
 		
 	10. 예외 처리
+		프로그램의 안정성을 위한 처리, 예외가 처리되면 프로그래밍이 에러나 외부적인 처리가 불가능한 상황에 대비하여
+		기능적으로 처리가 가능하다.
+		1) 예외 처리의 구분
+			- 컴파일 예외
+			- 실행 예외
+		2) 예외의 상속구조
+			- Exception 상위로 하여 여러가지 예외클래스는 상속 구조
+		3) 예외 처리의 핵심 멤버
+			생성자
+				super(msg) : 문자열 매개변수 생성자는 기능 메서드 getMessage()로 가져온다.
+			메서드
+				getMessage(): 예외의 기본 메시지 처리
+				printStackTrace(): 예외가 처리되는 과정을 class메서드 단위로 표시
+		4) 단계별 예외 처리 형태
+			- 예외처리 1단계
+				try{
+					컴파일 예외 내지 실행 예외
+					예외 발생 즉시, 해당 라인에서 catch블럭과 Exception 매개변수로 예외를 던진다.
+				}catch(Exception e){
+					예외가 던져지면 해당 예외를 처리하는 블럭
+				}
+			- 예외 처리 2단계(계층구조 및 finally블럭)
+				try{
+				}catch(하위예외클래스){		// 사용자정의나 구체적인 예외클래스 정의
+				}catch(Exception e){	// 상위 예외 정의
+					상위 클래스 예외가 메모리가 제일 크므로 가장 나중에 예외 처리
+				}finally{
+					예외가 있든 없든 처리하는 구문
+				}
+			- 예외 처리 3단계
+				void 메서드() throws 위임할예외클래스1, 위임할예외클래스2,...{
+					예외 처리될 코드..
+				}
+				호출하는 곳
+				try{
+					메서드1();
+					메서드2();
+					메서드3();
+				}catch(위임예외클래스 e){}
+			- 예외 처리 4단계(사용자 정의 예외처리)
+				class 사용자정의예외 extends Exception{
+					생성자(){
+						super("메시지 처리");
+					}
+					public void getMessage(){}	// 재정의할 내용
+					public void call01(){}		// 추가할 내용
+				}
+				try{
+					if(조건)
+						throw new 사용자정의 예외();
+				}catch(사용자정의예외 e){}
+			
 	11. 내장된 객체 활용1(java.lang.패키지)
+		Wrapper 클래스(Integer, Double,...)
+			Boxing/UnBoxing/AutoBoxing/AutoUnBoxing
+			기본유형 <=> 객체
+		String
+			new String(byte[])
+			split(): 구분자를 통해서 배열객체를 생성처리
+				String[] arry = "홍길동^김길동^신길동".split("^");
+			 substring(): 문자열을 추출하여 데이터로 활용처리
+			 	"891212-2902815".substring(0,2) "89"연도추출
+			 charAt(index): 특정한 문자 추출
+			 length(): 문자의 길이 반환
+			 
 	12. 내장된 객체 활용2(java.util.패키지)
+		Collection
+			Set: 중복 삭제, 위치 임의
+			List: 선형구조, 중복 가능, index로 데이터 할당, 동적 배열 처리
+			Map: key, value형식 데이터 할당 호출
+				keySet(): 키만 Set형식으로 가져오기
+				get(키): 키로 값 가져오기
+				entryKeys()
+			- 주요 기능 메서드: add(), get(), put(), size()
 	13. 내장된 객체 활용3(java.io.패키지)
-		1) 데이터의 읽기
-		2) 데이터의 쓰기
+		1) 데이터의 읽기	InputStream
+			int code = read() char단위로 가져오기
+				(char)code
+			read(byte[] bytes) char[] 배열 가져오기(byte[] => char[])
+				for(byte b:bytes){
+					(char)
+				}
+			
+		2) 데이터의 쓰기	OutputStream
+			OutputStream os = System.out
+			os.write(byte[]): 코드값을 처리하면 매칭되는 문자 char을 가져온다
+		3) File 객체
+			File f = new File("경로/파일명")
+				경로나 파일을 생성하는 객체
+			f.mkdir(): 경로를 생성하는 메서드
+			f.createNewFile(): 파일을 물리적으로 생성하는 메서드
+				is 발생 필수 예외처리
+			Reader fr = new FileReader("경로/파일명");
+			파일의 내용을 읽어오는 객체
+			fr.read(): char단위로 읽어오는 객체
+			
+			Writer wt = new FileWriter("경로/파일명");
+			wt.append();	wt.write()
+			파일의 내용을 쓰는 객체
+			
 	14. 데이터베이스 연동
-	
+		1) sql 익히기
+		2) DB 서버 접속
+		3) sql명령을 통해 서버에 명령 처리
+		4) 결과값으로 ResultSet 객체로 담아서
+		5) Vo 객체나 List<Vo>에 담아서 데이터를 처리
 	# 프로그램 학습시, 주의 사항
 	1. 오타, 에러 발생
 		원인을 반드시 곰곰히 생각해서 추후에 정리 해놓도록 한다.
